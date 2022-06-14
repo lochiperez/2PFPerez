@@ -1,0 +1,38 @@
+<div class="container p-4">
+    <div class="d-flex align-items-end">
+        <button (click)="goBack()" class="m-2" mat-fab color="primary" aria-label="back button" matTooltip="Volver a usuarios">
+                    <mat-icon>arrow_back_ios_new</mat-icon>
+                </button>
+        <h1 appTitles>Inscripciones de {{ studentToEdit!.name }} {{ studentToEdit!.lastname }} </h1>
+    </div>
+
+    <div class="container d-flex justify-content-center">
+        <mat-card class="inscription-card p-4">
+            <mat-card-header>
+                <mat-card-title>Seleccionar Curso</mat-card-title>
+            </mat-card-header>
+            <form  [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+                <mat-card-content>                  
+                    <mat-form-field appearance="fill">
+                        <mat-label>Curso</mat-label>
+                        <mat-select formControlName="course">
+                          <mat-option *ngFor="let course of courses" [value]="course.id">
+                            {{course.course}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="inscriptionForm.get('course')?.touched && inscriptionForm.get('course')?.errors?.['required']">
+                            Debe seleccionar un rol de usuario.
+                        </mat-error>
+                      </mat-form-field>                 
+                </mat-card-content>
+                <mat-card-actions class="text-center">
+                    <button type="submit" mat-raised-button color="primary" [disabled]="this.inscriptionForm.invalid" >Inscribir</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+    
+    
+
+</div>
+

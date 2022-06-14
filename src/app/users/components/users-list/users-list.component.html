@@ -1,0 +1,52 @@
+<div class="container py-3">
+
+    <div class="d-flex align-items-end">
+      <h1 appTitles>Listado de usuarios</h1>
+    </div>
+    <button [ngClass]="usr!.rol === 'admin' ? '' : 'd-none'" (click)="onClickAdd()" class="m-2" mat-fab color="primary" aria-label="add button" matTooltip="Agregar un nuevo usuario">
+      <mat-icon>add</mat-icon>
+    </button>
+    
+    <table #table mat-table [dataSource]="usersData" class="mat-elevation-z8 px-0 w-100" aria-describedby="Tabla de Usuarios">
+    
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td class="fw-bold" mat-cell *matCellDef="let user"> {{ user.lastname }}, {{ user.name }} </td>
+      </ng-container>
+    
+      <!-- Username Column -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let user"> {{ user.username }} </td>
+      </ng-container>
+      
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let user">
+            <div class="row">
+              <mat-icon (click)="onClickDetails(user)" class="col" aria-hidden="false" aria-label="post_add icon" matTooltip="Ver detalles del usuario">description</mat-icon>
+              <mat-icon [ngClass]="usr!.rol === 'admin' ? '' : 'd-none'" (click)="onClickEdit(user)" class="col" aria-hidden="false" aria-label="edit icon" matTooltip="Editar Estudiante">edit</mat-icon>
+              <mat-icon [ngClass]="usr!.rol === 'admin' ? '' : 'd-none'" (click)="onDeleteuser(user)" class="col" aria-hidden="false" aria-label="delete icon" matTooltip="Eliminar Estudiante">delete</mat-icon>
+            </div>
+          
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <div *ngIf="usersData.length === 0" class="container mt-2 d-flex justify-content-center">
+      <h3 class="fw-semibold text-muted">No existen usuarios para listar</h3>
+    </div>
+
+  </div>
+  

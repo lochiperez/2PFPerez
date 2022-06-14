@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="d-flex align-items-end">
+        <button [routerLink]="'..'" class="m-2" mat-fab color="primary" aria-label="back button"
+            matTooltip="Volver a estudiantes">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+        <h1 appTitles>Formulario de cursos</h1>
+    </div>
+    <mat-card class="login-card p-4">
+        <mat-card-header>
+            <mat-card-title>Agregar un Curso nuevo</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Nombre del Curso</mat-label>
+                    <input type="text" matInput formControlName="course">
+                    <mat-error
+                        *ngIf="courseForm.get('course')?.touched && courseForm.get('course')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="courseForm.get('course')?.touched && courseForm.get('course')?.errors?.['minlength']">
+                        El nombre de usuario tiene por lo menos <strong>3 caracteres</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="courseForm.get('course')?.touched && courseForm.get('course')?.errors?.['maxlength']">
+                        El nombre de usuario tiene un máximo de <strong>15 caracteres</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Nombre del docente</mat-label>
+                    <input type="text" matInput formControlName="professor">
+                    <mat-error
+                        *ngIf="courseForm.get('professor')?.touched && courseForm.get('professor')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="courseForm.get('professor')?.touched && courseForm.get('professor')?.errors?.['minlength']">
+                        El nombre del docente tiene por lo menos <strong>3 caracteres</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="courseForm.get('professor')?.touched && courseForm.get('professor')?.errors?.['maxlength']">
+                        El nombre del docente tiene un máximo de <strong>20 caracteres</strong>.
+                    </mat-error>
+                </mat-form-field>
+
+            </mat-card-content>
+            <mat-card-actions class="text-center">
+                <button type="submit" mat-raised-button color="primary" [disabled]="this.courseForm.invalid">Agregar
+                    Curso</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="d-flex align-items-end">
+        <button [routerLink]="'..'" class="m-2" mat-fab color="primary" aria-label="back button"
+            matTooltip="Volver a usuarios">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+        <h1 appTitles>Detalles del Alumno</h1>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Datos Personales </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-list>
+                        <div class="row">
+                            <mat-list-item>
+                                <div class="col-2" appItemName>Nombre:</div>
+                                <div class="col-10">{{ student.name }} {{ student.lastname }}</div>
+                            </mat-list-item>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button [ngClass]="user!.rol === 'admin' ? '' : 'd-none'" (click)="onClickEdit()" class="m-2"
+                        mat-mini-fab color="primary" aria-label="edit button"
+                        matTooltip="Editar datos personales del alumno">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button [ngClass]="user!.rol === 'admin' ? '' : 'd-none'" (click)="onDeleteStudent()" class="m-2"
+                        mat-mini-fab color="primary" aria-label="delete button" matTooltip="Eliminar al alumno">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+            <mat-card class="mt-4">
+                <mat-card-header>
+                    <mat-card-title>Cursos a los que se ha inscripto </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-list>
+                        <div class="row" *ngFor="let course of student.cursos">
+                            <mat-list-item>
+                                <div class="col-1"><em class="fs-2 fa-brands fa-{{ course.course | courseIcon }}"></em>
+                                </div>
+                                <div class="col-11">{{ course.course }}</div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button [ngClass]="user!.rol === 'admin' ? '' : 'd-none'" (click)="onClickInscription()" class="m-2"
+                        mat-mini-fab color="primary" aria-label="edit button" matTooltip="Inscribir a un curso">
+                        <mat-icon>history_edu</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

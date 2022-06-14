@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="d-flex align-items-end">
+        <button [routerLink]="'..'" class="m-2" mat-fab color="primary" aria-label="back button"
+            matTooltip="Volver a usuarios">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+        <h1 appTitles>Formulario de usuario</h1>
+    </div>
+    <mat-card class="user-card p-4">
+        <mat-card-header>
+            <mat-card-title>Crear Usuario</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" matInput formControlName="name">
+                    <mat-error *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['minlength']">
+                        El nombre debe tener por lo menos <strong>3 caracteres</strong>.
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['maxlength']">
+                        El campo de nombre tiene un máximo de <strong>15 caracteres</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <input type="text" matInput formControlName="lastname">
+                    <mat-error
+                        *ngIf="userForm.get('lastname')?.touched && userForm.get('lastname')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('lastname')?.touched && userForm.get('lastname')?.errors?.['minlength']">
+                        El nombre debe tener por lo menos <strong>3 caracteres</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('lastname')?.touched && userForm.get('lastname')?.errors?.['maxlength']">
+                        El campo de nombre tiene un máximo de <strong>15 caracteres</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input type="text" matInput formControlName="username">
+                    <mat-error
+                        *ngIf="userForm.get('username')?.touched && userForm.get('username')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('username')?.touched && userForm.get('username')?.errors?.['minlength']">
+                        El nombre de usuario debe tener por lo menos <strong>5 caracteres</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('username')?.touched && userForm.get('username')?.errors?.['maxlength']">
+                        El campo de nombre de usuario tiene un máximo de <strong>10 caracteres</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName="password">
+                    <mat-error
+                        *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['minlength']">
+                        La contraseña debe tener por lo menos <strong>8 caracteres</strong>.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['maxlength']">
+                        El campo de contraseña tiene un máximo de <strong>15 caracteres</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>Reingresar Password</mat-label>
+                    <input type="password" matInput formControlName="checkpass">
+                    <mat-error
+                        *ngIf="userForm.get('checkpass')?.touched && userForm.get('checkpass')?.errors?.['required']">
+                        Este campo es <strong>obligatorio</strong>.
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('checkpass')?.touched && userForm.hasError('notSame')">
+                        Las contraseñas <strong>no coinciden</strong>.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="rol">
+                        <mat-option *ngFor="let rol of roles" [value]="rol.value">
+                            {{rol.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="userForm.get('rol')?.touched && userForm.get('rol')?.errors?.['required']">
+                        Debe seleccionar un rol de usuario.
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions class="text-center">
+                <button type="submit" mat-raised-button color="primary" [disabled]="this.userForm.invalid">Crear
+                    Usuario</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

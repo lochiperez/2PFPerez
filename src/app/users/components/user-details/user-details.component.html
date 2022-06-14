@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="d-flex align-items-end">
+        <button [routerLink]="'..'" class="m-2" mat-fab color="primary" aria-label="back button"
+            matTooltip="Volver a usuarios">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+        <h1 appTitles>Detalles del usuario</h1>
+    </div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Datos del usuario {{ user.username }} </mat-card-title>
+        </mat-card-header>
+        <mat-card-actions align="end">
+            <button [ngClass]="usr!.rol === 'admin' ? '' : 'd-none'" (click)="onClickEdit()" class="m-2" mat-mini-fab
+                color="primary" aria-label="edit button" matTooltip="Editar datos del usuario">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button [ngClass]="usr!.rol === 'admin' ? '' : 'd-none'" (click)="onDeleteuser()" class="m-2" mat-mini-fab
+                color="primary" aria-label="delete button" matTooltip="Eliminar el usuario">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+        <mat-card-content>
+            <mat-card>
+                <mat-list>
+                    <div class="row">
+                        <mat-list-item>
+                            <div class="col-2" appItemName>Nombre:</div>
+                            <div class="col-10">{{ user.name }} {{ user.lastname }}</div>
+                        </mat-list-item>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row">
+                        <mat-list-item>
+                            <div class="col-2" appItemName>Rol:</div>
+                            <div class="col-10">{{ user.rol | rol }}</div>
+                        </mat-list-item>
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

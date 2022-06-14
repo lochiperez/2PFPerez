@@ -1,0 +1,42 @@
+<div class="container py-3">
+
+    <div class="d-flex align-items-end">
+      <h1 appTitles>Inscripciones</h1>
+    </div>
+            
+    <p>Seleccione el estudiante que desea consultar</p>
+    <table #table mat-table [dataSource]="studentsData" class="mat-elevation-z8 px-0 w-100" aria-describedby="Tabla de alumnos">
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let student"> {{student.id}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td class="fw-bold" mat-cell *matCellDef="let student"> {{ student.lastname }}, {{ student.name }} </td>
+      </ng-container>
+          
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let student">
+            <div class="row">
+                <mat-icon (click)="onClickDetails(student)" class="col" aria-hidden="false" aria-label="details icon" matTooltip="Ver las inscripciones del estudiante">find_in_page</mat-icon>
+            </div>
+          
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <div *ngIf="studentsData.length === 0" class="container mt-2 d-flex justify-content-center">
+      <h3 class="fw-semibold text-muted">No existen alumnos a listar</h3>
+    </div>
+
+  </div>
+  
+
